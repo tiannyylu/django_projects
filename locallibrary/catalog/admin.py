@@ -27,9 +27,10 @@ class BookAdmin(admin.ModelAdmin):
     inlines = [BooksInstanceInline]
 
 # Register the Admin classes for BookInstance using the decorator
-@admin.register(BookInstance) 
+@admin.register(BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
     list_filter = ('status', 'due_back')
+    
     fieldsets = (
         (None, {
             'fields': ('book', 'imprint', 'id')
