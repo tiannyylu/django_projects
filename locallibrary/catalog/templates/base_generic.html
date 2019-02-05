@@ -8,7 +8,7 @@
   <!-- Add additional CSS in static file -->
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-  <meta name="wa4e" content="013d407166ec4fa56eb1e1f8cbe183b9">
+  <meta name="wa4e" content="812b4ba287f5ee0bc9d43bbf5bbe87fb">
 </head>
 <body>
   <div class="container-fluid">
@@ -20,27 +20,45 @@
           <li><a href="{% url 'books' %}">All books</a></li>
           <li><a href="{% url 'authors' %}">All authors</a></li>
         </ul>
+          {% if user.is_authenticated %}
+            <li>User: {{ user.get_username }}</li>
+            <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
+            <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+          {% endif %}
+        </ul>
+
+          {% if user.is_staff %}
+          <hr />
+          <ul class="sidebar-nav">
+          <li>Staff</li>
+          {% if perms.catalog.can_mark_returned %}
+          <li><a href="{% url 'all-borrowed' %}">All borrowed</a></li>
+          {% endif %}
+          </ul>
+           {% endif %}
      {% endblock %}
       </div>
       <div class="col-sm-10 ">
 	  {% block content %}{% endblock %}
-          {% block pagination %}
-  {% if is_paginated %}
-    <div class="pagination">
-      <span class="page-links">
-        {% if page_obj.has_previous %}
-          <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+      {% block pagination %}
+        {% if is_paginated %}
+            <div class="pagination">
+                <span class="page-links">
+                    {% if page_obj.has_previous %}
+                        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="page-current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
         {% endif %}
-        <span class="page-current">
-          <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</p>
-        </span>
-        {% if page_obj.has_next %}
-          <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
-        {% endif %}
-      </span>
-    </div>
-  {% endif %}
-{% endblock %}     
+      {% endblock %}
       </div>
     </div>
   </div>

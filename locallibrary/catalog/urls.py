@@ -8,6 +8,10 @@ urlpatterns = [
     path('author/<int:pk>', views.AuthorDetailView.as_view(), name='author-detail'),
 ]
 
+urlpatterns += [
+    path('mybooks/', views.LoanedBooksByUserListView.as_view(), name='my-borrowed'),
+]
+
 # New lines below to serve static files in debug mode
 import os
 from django.urls import re_path
