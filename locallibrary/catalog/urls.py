@@ -26,3 +26,6 @@ if settings.DEBUG:
             'document_root': os.path.join(BASE_DIR, 'catalog/static'),
         }),
     ]
+urlpatterns += [
+    path('borrowed/', views.LoanedBooksListView.as_view(), name='all-borrowed'),
+]
