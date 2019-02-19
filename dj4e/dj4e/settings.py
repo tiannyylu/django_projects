@@ -48,7 +48,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'dj4ecrud.urls'
+ROOT_URLCONF = 'dj4e.urls'
 
 TEMPLATES = [
     {
@@ -66,7 +66,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'dj4ecrud.wsgi.application'
+WSGI_APPLICATION = 'dj4e.wsgi.application'
 
 
 # Database
