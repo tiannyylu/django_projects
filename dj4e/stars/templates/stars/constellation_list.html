@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Constellation List</h1>
+  {% if constellation_list %}
+  <ul>
+    {% for constellation in constellation_list %}
+      <li>
+          {{ constellation.name }}
+         (<a href="{% url 'constellation_update' constellation.id %}">Update</a> |
+          <a href="{% url 'constellation_delete' constellation.id %}">Delete</a>)
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no constellations in the library.</p>
+  {% endif %}
+  <p><a href="{% url 'constellation_create' %}">Add a constellation</a></p>
+  <p>
+    <a href="{% url 'stars' %}">Back to stars</a>
+  </p>
+{% endblock %}

@@ -36,6 +36,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'autos.apps.AutosConfig',
+    'cats.apps.CatsConfig',
+    'pets.apps.PetsConfig',
+    'stars.apps.StarsConfig',
+    'wizards.apps.WizardsConfig',
+    'unesco.apps.UnescoConfig',
 ]
 
 MIDDLEWARE = [
